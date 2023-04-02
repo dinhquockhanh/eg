@@ -1,0 +1,26 @@
+; EditorConfig to support per-solution formatting.
+; http://editorconfig.org/
+
+; This is the default for the codeline.
+root = true
+
+; Default
+[*]
+indent_style = space
+trim_trailing_whitespace = true
+insert_final_newline = true
+end_of_line = lf
+
+; Go Code - match go fmt
+[*.go]
+indent_style = tab
+
+; Go template - match go fmt
+[*.tmpl]
+indent_style = tab
+
+
+; Markdown - match markdownlint settings
+[*.{md,markdown}]
+indent_size = 2
+trim_trailing_whitespace = false
