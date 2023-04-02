@@ -7,8 +7,3 @@ ErrInternal:
   code: 5000
   status: 500
   message: Internal server error
-
-ErrNotFound:
-  code: 4004
-  status: 404
-  message: Resource not found
