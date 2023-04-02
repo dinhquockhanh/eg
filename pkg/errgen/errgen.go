@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"text/template"
 
 	"gopkg.in/yaml.v3"
 )
@@ -21,13 +20,10 @@ type Config struct {
 	Errors      map[string]Error
 }
 
-const templateFileName = "errors.tmpl"
-
 func LoadConfig(configFile string, packageName string) (*Config, error) {
 	cfg := Config{
 		PackageName: packageName,
 	}
-
 	data, err := ioutil.ReadFile(configFile)
 	if err != nil {
 		return nil, err
@@ -40,20 +36,18 @@ func LoadConfig(configFile string, packageName string) (*Config, error) {
 }
 
 func Generate(cfg *Config, outputFile string) error {
-	errorsTemplate := template.Must(template.ParseFiles(templateFileName))
-	dir := filepath.Dir(outputFile)
-	if err := os.MkdirAll(dir, 0755); err != nil {
-		return fmt.Errorf("failed to create output directory: %v", err)
+	if err := os.MkdirAll(filepath.Dir(outputFile), 0755); err != nil {
+		return fmt.Errorf("create output directory: %v", err)
 	}
 
 	file, err := os.Create(outputFile)
 	if err != nil {
-		return fmt.Errorf("failed to create errors file %s: %v", outputFile, err)
+		return fmt.Errorf("create errors file %s: %v", outputFile, err)
 	}
 	defer file.Close()
 
 	if err := errorsTemplate.Execute(file, cfg); err != nil {
-		return fmt.Errorf("failed to execute errorsTemplate: %v", err)
+		return fmt.Errorf("execute errorsTemplate: %v", err)
 	}
 
 	return nil
