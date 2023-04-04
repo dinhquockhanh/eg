@@ -15,8 +15,9 @@ import (
 
 type Error struct {
 	Status  int
-	Code    int    {{jsonTag "code"}}
-	Message string {{jsonTag "message"}}
+	Code    int     {{jsonTag "code"}}
+	Message string  {{jsonTag "message"}}
+	Errs    []Error {{jsonTag "errors"}}
 }
 
 var (
@@ -28,6 +29,10 @@ var (
 	}
 {{- end}}
 )
+
+func (err *Error) Error() string {
+	return err.Message
+}
 
 // Is a wrapper of built-in errors.Is
 func Is(err, target error) bool {
