@@ -38,6 +38,10 @@ func Is(err, target error) bool {
 func As(err error, target any) bool {
 	return errors.As(err, target)
 }
+// New a wrapper of built-in errors.New
+func New(text string) error {
+	return errors.New(text)
+}
 
 `
 

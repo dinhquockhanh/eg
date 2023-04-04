@@ -16,7 +16,8 @@ eg [flags]
 ```
 ### Example
 ```shell
-eg -p errors -f errors-example.yaml -o errors/errors.go
+eg -p errors -f errors-example.yaml -o out/errors.go
+eg -f errors-example.yaml -o out/errors.md -t md
 ```
 #### example config file: config-example.yaml
 ```yaml
@@ -68,5 +69,12 @@ func Is(err, target error) bool {
 func As(err error, target any) bool {
 	return errors.As(err, target)
 }
+
+```
+```markdown
+| Status | Code |         Message        |
+|--------|------|------------------------|
+|   400  | 4000 | Invalid input provided |
+|   500  | 5000 |  Internal server error |
 
 ```
