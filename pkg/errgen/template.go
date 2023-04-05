@@ -17,7 +17,7 @@ type Error struct {
 	Status  int    {{jsonTag "-"}}
 	Code    int    {{jsonTag "code"}}
 	Message string {{jsonTag "message"}}
-	Errs    any    {{jsonTag "error,omitempty"}}
+	Err     any    {{jsonTag "error,omitempty"}}
 }
 
 var (
