@@ -14,10 +14,10 @@ import (
 )
 
 type Error struct {
-	Status  int     {{jsonTag "-"}}
-	Code    int     {{jsonTag "code"}}
-	Message string  {{jsonTag "message"}}
-	Errs    []Error {{jsonTag "error,omitempty"}}
+	Status  int    {{jsonTag "-"}}
+	Code    int    {{jsonTag "code"}}
+	Message string {{jsonTag "message"}}
+	Errs    any    {{jsonTag "error,omitempty"}}
 }
 
 var (
