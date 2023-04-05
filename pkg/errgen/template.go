@@ -14,10 +14,10 @@ import (
 )
 
 type Error struct {
-	Status  int
+	Status  int     {{jsonTag "-"}}
 	Code    int     {{jsonTag "code"}}
 	Message string  {{jsonTag "message"}}
-	Errs    []Error {{jsonTag "errors"}}
+	Errs    []Error {{jsonTag "error,omitempty"}}
 }
 
 var (
@@ -43,6 +43,7 @@ func Is(err, target error) bool {
 func As(err error, target any) bool {
 	return errors.As(err, target)
 }
+
 // New a wrapper of built-in errors.New
 func New(text string) error {
 	return errors.New(text)
