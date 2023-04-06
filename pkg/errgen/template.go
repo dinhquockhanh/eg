@@ -34,6 +34,35 @@ func (err *Error) Error() string {
 	return err.Message
 }
 
+// WithDetail Clone a new Error and set detail for it
+func (err *Error) WithDetail(detail string) *Error {
+	return &Error{
+		Status:  err.Status,
+		Code:    err.Code,
+		Message: err.Message,
+		Detail:  detail,
+	}
+}
+
+// WithDetailf Clone a new Error and set detail for it
+func (err *Error) WithDetailf(format string, detail ...any) *Error {
+	return &Error{
+		Status:  err.Status,
+		Code:    err.Code,
+		Message: err.Message,
+		Detail:  fmt.Sprintf(format, detail...),
+	}
+}
+
+func (err *Error) Is(e error) bool {
+	var temp *Error
+	if !errors.As(e, &temp) {
+		return false
+	}
+	return err.Code == temp.Code
+}
+
+
 // Is a wrapper of built-in errors.Is
 func Is(err, target error) bool {
 	return errors.Is(err, target)
