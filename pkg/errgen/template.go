@@ -11,13 +11,14 @@ package {{.PackageName}}
 
 import (
 	"errors"
+	"fmt"
 )
 
 type Error struct {
 	Status  int    {{jsonTag "-"}}
 	Code    int    {{jsonTag "code"}}
 	Message string {{jsonTag "message"}}
-	Err     any    {{jsonTag "error,omitempty"}}
+	Detail  string {{jsonTag "detail"}}
 }
 
 var (
